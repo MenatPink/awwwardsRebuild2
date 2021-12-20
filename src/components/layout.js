@@ -1,21 +1,26 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 //Styled Components
 import { createGlobalStyle, ThemeProvider } from "styled-components"
-import { normalize } from 'styled-normalize'
+import { normalize } from "styled-normalize"
 
 //Components
 import Header from "./Header"
+import Cursor from "./CustomCursor"
 
-
+//Context
+import {
+  useGlobalStateContext,
+  useGlobalDispatchContext,
+} from "../context/globalContext"
 
 const GlobalStyle = createGlobalStyle`
 ${normalize}
 *{
   text-decoration:none;
-  /* cursor:pointer; */
+  cursor:none;
 }
 
 html{
@@ -45,22 +50,33 @@ const Layout = ({ children }) => {
   `)
 
   const darkTheme = {
-    background: '#000',
-    text: '#fff'
+    background: "#000",
+    text: "#fff",
+    red: "#ea291e",
   }
 
   const lightTheme = {
-    background: '#fff',
-    text: '#000'
+    background: "#fff",
+    text: "#000",
+    red: "#ea291e",
   }
 
+  const onCursor = cursorType => {
+    cursorType = (cursorStyles.includes(cursorType) && cursorType) || false
+    dispatch({ type: "CURSOR_TYPE", cursorType: cursorType })
+  }
 
+  const { currentTheme, cursorStyles } = useGlobalStateContext()
+  const dispatch = useGlobalDispatchContext() 
 
-  return <ThemeProvider theme={lightTheme}>
-    <GlobalStyle />
-    <Header />
-    <main>{children}</main>
-  </ThemeProvider>
+  return (
+    <ThemeProvider theme={currentTheme === "dark" ? darkTheme : lightTheme}>
+      <GlobalStyle />
+      <Cursor />
+      <Header onCursor={onCursor} />
+      <main>{children}</main>
+    </ThemeProvider>
+  )
 }
 
 Layout.propTypes = {

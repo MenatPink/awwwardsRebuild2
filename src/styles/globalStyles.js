@@ -29,6 +29,56 @@ ${props =>
 `
 
 export const Flex = styled.div`
-  background: blueviolet;
-  color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  ${props =>
+    props.spaceBetween &&
+    css`
+      justify-content: space-between;
+    `}
+
+  ${props =>
+    props.flexEnd &&
+    css`
+      justify-content: flex-end;
+    `}
+
+  ${props =>
+    props.alignTop &&
+    css`
+      align-items: top;
+    `}
+
+  ${props =>
+    props.noHeight &&
+    css`
+      height: 0;
+    `}
+`
+
+export const Cursor = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  background: ${props => props.theme.red};
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  transition: all 0.1s ease-in-out;
+  transition-property: width, height, border;
+  will-change: width, height, transform, border;
+  pointer-events: none;
+  z-index: 999;
+  &.pointer {
+    border: 4px solid ${props => props.theme.text} !important;
+  }
+  &.hovered {
+    background: transparent !important;
+    width: 56px;
+    height: 56px;
+    border: 4px solid ${props => props.theme.red};
+  }
 `
