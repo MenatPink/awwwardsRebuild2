@@ -59,7 +59,7 @@ export const Content = styled.h2`
   color: ${props => props.theme.text};
 `
 
-export const HomeFeaturedSection = styled.div`
+export const HomeFeaturedSection = styled(motion.div  )`
   margin-bottom: 200px;
   position: relative;
   a {
@@ -69,7 +69,7 @@ export const HomeFeaturedSection = styled.div`
   }
 `
 
-export const FeaturedContent = styled.div`
+export const FeaturedContent = styled(motion.div)`
   height: 400px;
   width: 100%;
   padding: 56px 124px;
@@ -102,7 +102,7 @@ export const FeaturedContent = styled.div`
       svg {
         position: absolute;
         top: 16px;
-        /* left: 48px; */
+        left: -48px;
         width: 108px;
         path {
           fill: ${props => props.theme.text};
