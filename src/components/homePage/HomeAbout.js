@@ -146,7 +146,7 @@ const Accordian = ({ details, expanded, setExpanded, onCursor }) => {
         onHoverStart={() => setHovered(!hovered)}
         onHoverEnd={() => setHovered(!hovered)}
         whileHover={{
-          color: currentTheme === "dark" ? "#000000" : "#ffffff",
+          color: currentTheme.currentTheme === "dark" ? "#ffffff" : "#000000",
         }}
       >
         <AccordianIcon>

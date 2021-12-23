@@ -19,8 +19,8 @@ height:100%;
 }
 
 ${props =>
-  props.fluid &&
-  css`
+    props.fluid &&
+    css`
     padding: 0;
     margin: 0;
     max-width: 100%;
@@ -83,5 +83,13 @@ export const Cursor = styled.div`
   }
   &.nav-open {
     background: ${props => props.theme.text};
+  }
+  &.locked{
+    background: transparent !important;
+    width: 56px;
+    height: 56px;
+    border: 4px solid ${props => props.theme.red};
+    top: ${props => props.theme.top} !important;
+    left: ${props => props.theme.left} !important;
   }
 `

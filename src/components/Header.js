@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useRef } from "react"
 
 //Styled Components
 import { HeaderNav, Logo, Menu } from "../styles/headerStyles"
@@ -11,9 +11,20 @@ import {
   useGlobalDispatchContext,
 } from "../context/globalContext"
 
-const Header = ({ onCursor, setToggleMenu, toggleMenu }) => {
+//Custom Hook
+import useElementPosition from "../hooks/useElementPosition"
+
+const Header = ({
+  onCursor,
+  setToggleMenu,
+  toggleMenu,
+  hamburgerPosition,
+  setHamburgerPosition,
+}) => {
   const dispatch = useGlobalDispatchContext()
   const { currentTheme } = useGlobalStateContext()
+  const hamburger = useRef(null)
+  const position = useElementPosition(hamburger)
 
   const toggleTheme = () => {
     if (currentTheme === "dark") {
@@ -21,6 +32,11 @@ const Header = ({ onCursor, setToggleMenu, toggleMenu }) => {
     } else {
       dispatch({ type: "TOGGLE_THEME", theme: "dark" })
     }
+  }
+
+  const menuHover = () => {
+    onCursor("locked")
+    setHamburgerPosition({ x: position.x, y: position.y + 72 })
   }
 
   useEffect(() => {
@@ -47,7 +63,12 @@ const Header = ({ onCursor, setToggleMenu, toggleMenu }) => {
             ></span>
             <Link to="/">W</Link>
           </Logo>
-          <Menu onClick={() => setToggleMenu(!toggleMenu)}>
+          <Menu
+            ref={hamburger}
+            onClick={() => setToggleMenu(!toggleMenu)}
+            onMouseEnter={menuHover}
+            onMouseLeave={onCursor}
+          >
             <button>
               <span></span>
               <span></span>
