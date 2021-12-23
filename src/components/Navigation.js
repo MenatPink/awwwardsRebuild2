@@ -3,11 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 
 //Styled Components
 import { Container, Flex } from "../styles/globalStyles"
-import {
-  FooterNav,
-  FooterContent,
-  FooterSocial,
-} from "../styles/footerStyles.js"
+import { FooterContent, FooterSocial } from "../styles/footerStyles.js"
 
 //Icons
 import { Instagram, Facebook, Vimeo } from "../assets/svg/social-icons.js"

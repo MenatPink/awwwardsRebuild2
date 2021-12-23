@@ -67,7 +67,11 @@ const accordianIds = [
   },
 ]
 
-const HomeAbout = ({ onCursor }) => {
+const HomeAbout = ({ onCursor}) => {
+  //Cursor Hover
+
+
+
   const animation = useAnimation()
   const [aboutRef, inView] = useInView({
     triggerOnce: true,

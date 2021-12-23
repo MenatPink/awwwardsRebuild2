@@ -55,6 +55,10 @@ const Layout = ({ children }) => {
     x: 0,
     y: 0,
   })
+  const [iconPosition, setIconPosition] = useState({
+    x: 0,
+    y: 0,
+  })
 
   const darkTheme = {
     background: "#000",
@@ -99,7 +103,11 @@ const Layout = ({ children }) => {
         onCursor={onCursor}
       />
       <main>{children}</main>
-      <Footer onCursor={onCursor} />
+      <Footer
+        onCursor={onCursor}
+        iconPosition={iconPosition}
+        setIconPosition={setIconPosition}
+      />
     </ThemeProvider>
   )
 }

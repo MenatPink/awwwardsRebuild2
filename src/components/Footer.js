@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 
 //Styled Components
 import { Container, Flex } from "../styles/globalStyles"
@@ -11,7 +11,18 @@ import {
 //Icons
 import { Instagram, Facebook, Vimeo } from "../assets/svg/social-icons.js"
 
-const Footer = ({ onCursor }) => {
+//Custom Hook
+import useElementPosition from "../hooks/useElementPosition"
+
+const Footer = ({ onCursor, iconPosition, setIconPosition }) => {
+  const icon = useRef(null)
+  const position = useElementPosition(icon)
+  const iconHover = () => {
+    onCursor("locked")
+    setIconPosition({ x: position.x, y: position.y })
+    console.log(iconPosition)
+  }
+
   return (
     <FooterNav>
       <Container>
@@ -26,24 +37,17 @@ const Footer = ({ onCursor }) => {
           </FooterContent>
           <FooterSocial>
             <a
-              onMouseEnter={() => onCursor("hovered")}
+              ref={icon}
+              onMouseEnter={iconHover}
               onMouseLeave={onCursor}
               href="/"
             >
               <Instagram />
             </a>
-            <a
-              onMouseEnter={() => onCursor("hovered")}
-              onMouseLeave={onCursor}
-              href="/"
-            >
+            <a onMouseLeave={onCursor} href="/">
               <Facebook />
             </a>
-            <a
-              onMouseEnter={() => onCursor("hovered")}
-              onMouseLeave={onCursor}
-              href="/"
-            >
+            <a onMouseLeave={onCursor} href="/">
               <Vimeo />
             </a>
           </FooterSocial>

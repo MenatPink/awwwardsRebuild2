@@ -18,7 +18,6 @@ const Header = ({
   onCursor,
   setToggleMenu,
   toggleMenu,
-  hamburgerPosition,
   setHamburgerPosition,
 }) => {
   const dispatch = useGlobalDispatchContext()
@@ -57,6 +56,9 @@ const Header = ({
           >
             <Link to="/">FURR</Link>
             <span
+              role="button"
+              tabIndex={0}
+              onKeyDown={toggleTheme}
               onMouseEnter={() => onCursor("pointer")}
               onMouseLeave={onCursor}
               onClick={toggleTheme}
