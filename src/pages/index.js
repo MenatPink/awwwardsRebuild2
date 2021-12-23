@@ -18,6 +18,7 @@ const IndexPage = props => {
   const dispatch = useGlobalDispatchContext()
 
   const onCursor = cursorType => {
+    console.log(cursorStyles)
     cursorType = (cursorStyles.includes(cursorType) && cursorType) || false
     dispatch({ type: "CURSOR_TYPE", cursorType: cursorType })
   }
