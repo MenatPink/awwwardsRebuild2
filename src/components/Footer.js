@@ -14,13 +14,19 @@ import { Instagram, Facebook, Vimeo } from "../assets/svg/social-icons.js"
 //Custom Hook
 import useElementPosition from "../hooks/useElementPosition"
 
-const Footer = ({ onCursor, iconPosition, setIconPosition }) => {
-  const icon = useRef(null)
-  const position = useElementPosition(icon)
-  const iconHover = () => {
+const Footer = ({ onCursor, setHamburgerPosition }) => {
+  const instagramRef = useRef(null)
+  const instagramPosition = useElementPosition(instagramRef)
+
+  const facebookRef = useRef(null)
+  const facebookPosition = useElementPosition(facebookRef)
+
+  const vimeoRef = useRef(null)
+  const vimeoPosition = useElementPosition(vimeoRef)
+
+  const iconHover = (x,y) => {
     onCursor("locked")
-    setIconPosition({ x: position.x, y: position.y })
-    console.log(iconPosition)
+    setHamburgerPosition({ x: x, y:y })
   }
 
   return (
@@ -37,17 +43,31 @@ const Footer = ({ onCursor, iconPosition, setIconPosition }) => {
           </FooterContent>
           <FooterSocial>
             <a
-              ref={icon}
-              onMouseEnter={iconHover}
+              ref={instagramRef}
+              onMouseEnter={() =>
+                iconHover(instagramPosition.x, instagramPosition.y)
+              }
               onMouseLeave={onCursor}
               href="/"
             >
               <Instagram />
             </a>
-            <a onMouseLeave={onCursor} href="/">
+            <a
+              ref={facebookRef}
+              onMouseEnter={() =>
+                iconHover(facebookPosition.x, facebookPosition.y)
+              }
+              onMouseLeave={onCursor}
+              href="/"
+            >
               <Facebook />
             </a>
-            <a onMouseLeave={onCursor} href="/">
+            <a
+              ref={vimeoRef}
+              onMouseEnter={() => iconHover(vimeoPosition.x, vimeoPosition.y)}
+              onMouseLeave={onCursor}
+              href="/"
+            >
               <Vimeo />
             </a>
           </FooterSocial>
