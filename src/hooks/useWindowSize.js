@@ -4,9 +4,16 @@ const isBrowser = typeof window !== "undefined"
 
 export default function useWindowSize() {
   function getSize() {
-    return {
-      width: window.innerWidth,
-      height: window.innerHeight,
+    if (isBrowser) {
+      return {
+        width: window.innerWidth,
+        height: window.innerHeight,
+      }
+    } else {
+      return {
+        width: null,
+        height: null,
+      }
     }
   }
   const [windowSize, setWindowSize] = useState(getSize)
