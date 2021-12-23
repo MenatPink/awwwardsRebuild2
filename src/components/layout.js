@@ -9,7 +9,7 @@ import { normalize } from "styled-normalize"
 //Components
 import Header from "./Header"
 import Cursor from "./CustomCursor"
-import Navigation from "./navigation"
+import Navigation from "./Navigation"
 import Footer from "./Footer"
 
 //Context
@@ -41,15 +41,17 @@ body{
 `
 
 const Layout = ({ children }) => {
-  // const data = useStaticQuery(graphql`
-  //   query SiteTitleQuery {
-  //     site {
-  //       siteMetadata {
-  //         title
-  //       }
-  //     }
-  //   }
-  // `)
+  const dispatch = useGlobalDispatchContext()
+  const { currentTheme, cursorStyles } = useGlobalStateContext()
+  const data = useStaticQuery(graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
 
   const [hamburgerPosition, setHamburgerPosition] = useState({
     x: 0,
@@ -71,9 +73,6 @@ const Layout = ({ children }) => {
     left: `${hamburgerPosition.x}px`,
     top: `${hamburgerPosition.y}px`,
   }
-
-  const { currentTheme, cursorStyles } = useGlobalStateContext()
-  const dispatch = useGlobalDispatchContext()
 
   const onCursor = cursorType => {
     cursorType = (cursorStyles.includes(cursorType) && cursorType) || false
