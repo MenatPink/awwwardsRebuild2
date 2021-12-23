@@ -43,7 +43,7 @@ body{
 const Layout = ({ children }) => {
   const dispatch = useGlobalDispatchContext()
   const { currentTheme, cursorStyles } = useGlobalStateContext()
-  const data = useStaticQuery(graphql`
+  useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
         siteMetadata {
